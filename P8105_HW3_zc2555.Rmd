@@ -19,7 +19,11 @@ library(dplyr)
 _Q1: How many aisles are there, and which aisles are the most items ordered from?_
 
 ```{r}
-instacart %>%
-  count()
+aisles_count =
+  instacart %>%
+  count(aisle, sort=TRUE)
+
+aisles_count
 ```
 
+There are 134 aisles in the instacart dataset, fresh vegatables have the most times, which is 150609
