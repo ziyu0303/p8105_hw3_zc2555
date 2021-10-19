@@ -1,0 +1,25 @@
+---
+title: "P8105_HW3_zc2555"
+author: "Ziyu Chen"
+date: "10/18/2021"
+output: github_document
+---
+
+_r setup & loading packages_
+```{r}
+library(p8105.datasets)
+data("instacart")
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+```
+
+#Problem 1
+
+_Q1: How many aisles are there, and which aisles are the most items ordered from?_
+
+```{r}
+instacart %>%
+  count()
+```
+
