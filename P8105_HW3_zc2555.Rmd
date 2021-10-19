@@ -44,3 +44,22 @@ ggplot(aisle_count,aes(x=reorder(aisle, -n),y=n))+
   ylab("Order Count")
 ```
 
+The top three aisles are fresh vegetables, fresh furit and packaged vegetables fruit.
+
+
+_Q3: Make a table showing the three most popular items_
+
+
+```{r}
+instacart %>%
+  filter(aisle %in% c("baking ingredients", "dog food care", "packaged vegetables fruits")) %>%
+  group_by(aisle, product_name) %>%
+  summarise(
+    product_count = n()) %>%
+  mutate(
+    product_rank = min_rank(-product_count)) %>%
+  filter(product_rank <=3) %>%
+  select(-product_rank) %>%
+  knitr::kable()
+```
+
