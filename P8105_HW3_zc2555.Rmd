@@ -138,3 +138,39 @@ brfss_excellent %>%
 ```
 
 
+_Make a two-panel plot showing_
+
+```{r}
+ brfss %>%
+    filter(year == 2006 | year == 2010, 
+         state == "NY") %>%
+  select(year, state, response, data_value) %>%
+  drop_na() %>% 
+  ggplot(aes(x = response, y = data_value)) +
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle =90))+
+   facet_grid(.~ year)
+   
+ 
+```
+
+#Problem 3
+
+_load the data_
+
+```{r } 
+accel_data = read_csv("accel_data.csv") %>%
+  janitor::clean_names()%>%
+ mutate(
+    weekday_Weekend = ifelse(day_id %in% c(6,7), "Weekend", "Weekday"),
+    week = as.integer(week),
+    day_id = as.integer(day_id)
+  ) %>%
+  relocate (day_id, weekday_Weekend, day)
+   
+accel_data %>%
+  knitr::kable()
+```
+
+
+
