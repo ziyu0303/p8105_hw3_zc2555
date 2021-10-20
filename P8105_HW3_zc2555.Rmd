@@ -127,14 +127,11 @@ brfss_excellent = brfss %>%
   filter(response == "Excellent")%>%
   mutate(data_value_sum = sample_size*data_value) %>% 
   group_by(year, state) %>%
-  summarise(nsample = sum(sample_size),
-              data_value_sumall = sum(data_value_sum),
-              data_value_mean = mean(data_value)) %>% 
-    mutate(data_value_weightedmean = data_value_sumall/nsample) %>% 
-    select(year, state, data_value_weightedmean, data_value_mean)
+  summarise(data_value_mean = mean(data_value)) %>% 
+    select(year, state,  data_value_mean)
 
 brfss_excellent %>%
-  ggplot(aes(x = year, y = data_value_weightedmean, group = state, color = state)) +
+  ggplot(aes(x = year, y = data_value_mean, group = state, color = state)) +
  geom_line()
 
 
