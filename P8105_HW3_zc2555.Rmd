@@ -172,5 +172,67 @@ accel_data %>%
   knitr::kable()
 ```
 
+The dataset has 35 obs and have 1443 variables.  There are four date variables : ‘day_id’, ‘week’, ‘day_id’, ‘day’ , ‘weekday_end’(weekday or weekend), and 1440 activities variables which count for each minute of a 24-hour day starting at midnight.
+
+_aggregate minites per day_
+
+```{r}
+accel_data_day = accel_data %>%
+  mutate(activity_sum = rowSums(across(activity_1:activity_1440))) %>% 
+  select (  week, day, activity_sum) %>% 
+  pivot_wider(names_from = day, values_from = activity_sum )%>% 
+  select (week, Monday, Wednesday, Thursday, Friday, Saturday, Sunday)
+accel_data_day  %>%
+knitr::kable()
+```
+
+From the table,we can see that the among weekdays, monday the activity levels are usually not hight, while wednesday and thursday are higher, on weekends, the activity level usually drops
+
+_24 activity time for each day_
+
+```{r}
+accel_each_day = accel_data %>%
+  select(week, day, activity_1:activity_1440)%>%
+ pivot_longer(
+    activity_1:activity_1440,
+    names_to = "activity_time",
+    values_to = "activity"
+  ) %>%
+  separate(activity_time, c(NA, 'activity_time'), sep = '_') %>%
+  mutate(
+    activity_time = as.integer(activity_time),
+    day = factor(day, levels = c('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday'))) 
+
+accel_each_day  %>%
+  ggplot(aes(x = activity_time, y = activity, color = day)) +
+  geom_smooth(alpha = 0.5) +
+  ylab ("total activity level")
+```
+The x axis represents the minutes in one day, from 00:00 to 24:00 in minutes, we can see that the aggregate activity levels for each weekdays across 5 week has similar trends, as they have low activity level from 24:00 to the morning, indicating they might be sleeping. After around 500 minites (around 8 am), the activity level rises, indicating this person might get up to do something else
+
+
+
+
+
+
+
+
+#group_by(day) %>%
+# summarise(activity_day_mean = mean (activity_sum)) %>%
+#  mutate(day = factor(day, levels = c( 'Monday', 'Tuesday', 'Wednesday', #'Thursday','Friday', 'Saturday','Sunday')))  
+
+#    ggplot(aes(x = day, y = activity_day_mean)) +
+#  geom_bar(stat = 'identity') +
+#  ggtitle ("Aggregate minites of total activity from Mon-Fri")+
+#  ylab ("total minutes of activities" )
+
+
+_single panel plot_
+
+```{r}
+
+```
+
+
 
 
