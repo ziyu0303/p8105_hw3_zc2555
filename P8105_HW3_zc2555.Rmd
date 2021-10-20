@@ -192,7 +192,7 @@ _24 activity time for each day_
 
 ```{r}
 accel_each_day = accel_data %>%
-  select(week, day, activity_1:activity_1440)%>%
+  select(week, day, activity_1:activity_1440, day_id)%>%
  pivot_longer(
     activity_1:activity_1440,
     names_to = "activity_time",
@@ -204,9 +204,11 @@ accel_each_day = accel_data %>%
     day = factor(day, levels = c('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday'))) 
 
 accel_each_day  %>%
-  ggplot(aes(x = activity_time, y = activity, color = day)) +
-  geom_smooth(alpha = 0.5) +
-  ylab ("total activity level")
+  ggplot(aes(x = activity_time, y = activity, color = day, se=FALSE)) +
+  geom_line (alpha = 0.5) +
+  geom_smooth(aes(group=day), se = FALSE)+
+  ylab ("total activity level")+
+  xlab("Minute")
 ```
 The x axis represents the minutes in one day, from 00:00 to 24:00 in minutes, we can see that the aggregate activity levels for each weekdays across 5 week has similar trends, as they have low activity level from 24:00 to the morning, indicating they might be sleeping. After around 500 minites (around 8 am), the activity level rises, indicating this person might get up to do something else
 
