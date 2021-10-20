@@ -217,22 +217,6 @@ The x axis represents the minutes in one day, from 00:00 to 24:00 in minutes, we
 
 
 
-#group_by(day) %>%
-# summarise(activity_day_mean = mean (activity_sum)) %>%
-#  mutate(day = factor(day, levels = c( 'Monday', 'Tuesday', 'Wednesday', #'Thursday','Friday', 'Saturday','Sunday')))  
-
-#    ggplot(aes(x = day, y = activity_day_mean)) +
-#  geom_bar(stat = 'identity') +
-#  ggtitle ("Aggregate minites of total activity from Mon-Fri")+
-#  ylab ("total minutes of activities" )
-
-
-_single panel plot_
-
-```{r}
-
-```
-
 
 
 
