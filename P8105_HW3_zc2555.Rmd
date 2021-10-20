@@ -111,9 +111,33 @@ brfss_2002= brfss %>%
   summarise(location_count= n_distinct(county))  %>%
   filter(location_count >=7)
    
+brfss_2002
+
+```
+In 2002, 6 states were observed at 7 or more locations. They are Connecticut, Florida, Massachusetts, North Carolina, New Jersey, and Pennsylvania.
+
+n 2010, 14 states were observed at 7 or more locations. They are California, Colorado, Florida, Florida, Massachusetts, Maryland, North Carolina, Nebraska, New Jersey, New York, Ohio, Pennsylvania, South Carolina, Texas and Washington.
 
 
+_Make a “spaghetti” plot_
+
+
+```{r}
+brfss_excellent = brfss %>%
+  filter(response == "Excellent")%>%
+  mutate(data_value_sum = sample_size*data_value) %>% 
+  group_by(year, state) %>%
+  summarise(nsample = sum(sample_size),
+              data_value_sumall = sum(data_value_sum),
+              data_value_mean = mean(data_value)) %>% 
+    mutate(data_value_weightedmean = data_value_sumall/nsample) %>% 
+    select(year, state, data_value_weightedmean, data_value_mean)
+
+brfss_excellent %>%
+  ggplot(aes(x = year, y = data_value_weightedmean, group = state, color = state)) +
+ geom_line()
 
 
 ```
+
 
