@@ -184,7 +184,7 @@ accel_data_day = accel_data %>%
   mutate(activity_sum = rowSums(across(activity_1:activity_1440))) %>% 
   select (  week, day, activity_sum) %>% 
   pivot_wider(names_from = day, values_from = activity_sum )%>% 
-  select (week, Monday, Wednesday, Thursday, Friday, Saturday, Sunday)
+  select (week, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)
 accel_data_day  %>%
 knitr::kable()
 ```
