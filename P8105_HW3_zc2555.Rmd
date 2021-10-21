@@ -168,8 +168,7 @@ accel_data = read_csv("accel_data.csv") %>%
   ) %>%
   relocate (day_id, weekday_Weekend, day)
    
-accel_data %>%
-  knitr::kable()
+
 ```
 
 The dataset has 35 obs and have 1443 variables.  There are four date variables : ‘day_id’, ‘week’, ‘day_id’, ‘day’ , ‘weekday_end’(weekday or weekend), and 1440 activities variables which count for each minute of a 24-hour day starting at midnight.
