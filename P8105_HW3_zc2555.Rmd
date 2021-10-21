@@ -175,7 +175,7 @@ accel_data = read_csv("accel_data.csv") %>%
 
 
 
-The dataset has 35 obs and have 1443 variables.  There are four date variables : ‘day_id’, ‘week’, ‘day_id’, ‘day’ , ‘weekday_end’(weekday or weekend), and 1440 activities variables which count for each minute of a 24-hour day starting at midnight. Each row is one day, and column activity_1:activity_1440 counts for each minute of a 24-hour day starting at midnight.  Weekday_weekend variable is created to indicate whether the day is weekday or weekend.
+The dataset has 35 obs and have 1444 variables. There are four date variables : ‘day_id’, ‘week’, ‘day_id’, ‘day’ , ‘weekday_end’(weekday or weekend), and 1440 activities variables which count for each minute of a 24-hour day starting at midnight. Each row is one day, and column activity_1:activity_1440 counts for each minute of a 24-hour day starting at midnight.  Weekday_weekend variable is created to indicate whether the day is weekday or weekend.
 
 _aggregate minites per day_
 
